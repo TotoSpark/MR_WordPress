@@ -27,9 +27,29 @@ class PROJETMR_Admin
             __('PROJET / Config'),
             __('Config'),
             'administrator',
-            'yeptrackchoicesfall_import_form',
-            array($this, 'yeptrackchoicesfall_import_form')
+            'yeptrackchoicesfall_import_forms',
+            array($this, 'listePays')
         );
+
+    }
+    public function yeptrackchoicesfall_import_forms() {
+
+        $YepTrackChoicesFall_Import_Form = new Insset_Views_Config();
+        return $YepTrackChoicesFall_Import_Form->display();
+
+    }
+
+    public function yeptrackchoicesfall_students() {
+
+        $Insset_Views_Inscrits = new Insset_Views_Inscrits();
+        return $Insset_Views_Inscrits->display();
+
+    }
+    public function listePays() {
+
+        $view = new JC_ProjetLP_CountryListView();
+
+        return false;
 
     }
 
