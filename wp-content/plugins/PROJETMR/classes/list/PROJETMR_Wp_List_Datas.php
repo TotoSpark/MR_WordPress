@@ -54,12 +54,15 @@ class PROJETMR_Wp_List_Datas extends WP_List_Table {
     public function get_columns($columns = array()) {
 
 
-        $columns['id'] = __('Id');
-        $columns['daate'] = __('daate');
+        $columns['pays'] = __('pays');
+        $columns['ISO'] = __('ISO');
+        $columns['etoiles'] = __('etoiles');
+        $columns['majeur'] = __('majeur');
+        $columns['actif'] = __('actif');
 
 
         global $wpdb;
-        $data = $wpdb->prefix . strtolower(INSSET_BASENAME) . '_subscribersdata';
+        $data = $wpdb->prefix . strtolower(PROJETMR_BASENAME) . '_pays';
 
         $sql = "SELECT DISTINCT cle FROM `$data` WHERE cle <> '';";
 
@@ -83,7 +86,7 @@ class PROJETMR_Wp_List_Datas extends WP_List_Table {
     {
         global $wpdb;
 
-        $sql = "SELECT DISTINCT `valeur` FROM " . $wpdb->prefix . PROJETMR_BASENAME . '_subscribersdata' . " WHERE `valeur` != ''";
+        $sql = "SELECT DISTINCT `valeur` FROM " . $wpdb->prefix . PROJETMR_BASENAME . '_pays' . " WHERE `valeur` != ''";
 
         $result = $wpdb->get_results($sql, 'ARRAY_A');
 
@@ -103,11 +106,11 @@ class PROJETMR_Wp_List_Datas extends WP_List_Table {
         //$sql = 'SELECT * FROM `'. $wpdb->prefix . 'insset_subscribers`' . "WHERE 1";
 
         $sql = "SELECT A.*, 
-            (SELECT B.`valeur` FROM " . $wpdb->prefix . INSSET_BASENAME . '_subscribersdata' . " B WHERE B.`id`=A.`id` AND B.`cle`='firstname' LIMIT 1) AS 'firstname', 
-            (SELECT B.`valeur` FROM " . $wpdb->prefix . INSSET_BASENAME . '_subscribersdata' . " B WHERE B.`id`=A.`id` AND B.`cle`='email' LIMIT 1) AS 'email',
-            (SELECT B.`valeur` FROM " . $wpdb->prefix . INSSET_BASENAME . '_subscribersdata' . " B WHERE B.`id`=A.`id` AND B.`cle`='lastname' LIMIT 1) AS 'lastname',
-            (SELECT B.`valeur` FROM " . $wpdb->prefix . INSSET_BASENAME . '_subscribersdata' . " B WHERE B.`id`=A.`id` AND B.`cle`='codepo' LIMIT 1) AS 'codepo'
-            FROM " . $wpdb->prefix . INSSET_BASENAME . '_subscribers' . " A ";
+            (SELECT B.`valeur` FROM " . $wpdb->prefix . PROJETMR_BASENAME . '_pays' . " B WHERE B.`id`=A.`id` AND B.`cle`='pays' LIMIT 1) AS 'pays', 
+            (SELECT B.`valeur` FROM " . $wpdb->prefix . PROJETMR_BASENAME . '_pays' . " B WHERE B.`id`=A.`id` AND B.`cle`='ISO' LIMIT 1) AS 'ISO',
+            (SELECT B.`valeur` FROM " . $wpdb->prefix . PROJETMR_BASENAME . '_pays' . " B WHERE B.`id`=A.`id` AND B.`cle`='etoiles' LIMIT 1) AS 'etoiles',
+            (SELECT B.`valeur` FROM " . $wpdb->prefix . PROJETMR_BASENAME . '_pays' . " B WHERE B.`id`=A.`id` AND B.`cle`='majeur' LIMIT 1) AS 'majeur'
+            FROM " . $wpdb->prefix . PROJETMR_BASENAME . '_pays' . " A ";
 
         if (!empty($_REQUEST['orderby'])) {
             $sql .= ' ORDER BY `'. esc_sql($_REQUEST['orderby']) .'`';

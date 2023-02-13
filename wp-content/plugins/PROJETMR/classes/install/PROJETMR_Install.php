@@ -17,17 +17,18 @@ class PROJETMR_Install {
         $charset_collate = $wpdb->get_charset_collate();
 
         if (!$this->isTableBaseAlreadyCreated('_pays')) {
-            $sql_voyages = '
+            $sql_pays = '
             CREATE TABLE IF NOT EXISTS `' . $wpdb->prefix . PROJETMR_BASENAME . '_pays' . '` (
+                `id` INT(11) AUTO_INCREMENT NOT NULL,
                 `pays` VARCHAR(255) NOT NULL,
                 `ISO` VARCHAR(3) NOT NULL,
                 `etoiles` INT(5) NOT NULL,
                 `majeur` BOOLEAN,
                 `actif` BOOLEAN,
-                PRIMARY KEY (`pays  `)
+                PRIMARY KEY (`id`)
             ) ENGINE=InnoDB ' . $charset_collate;
 
-            if (dbDelta($sql_voyages)) {
+            if (dbDelta($sql_pays)) {
 
                 $pays = ["Afghanistan",
                     "Îles Åland",
@@ -527,6 +528,7 @@ class PROJETMR_Install {
 
                 for ($i = 0; $i < count($pays); $i++) {
                     $wpdb->insert($wpdb->prefix . PROJETMR_BASENAME . '_pays', array(
+                        'id' => $i+1,
                         'pays' => $pays[$i],
                         'ISO' => $ISO3[$i],
                         'etoiles' => 0,

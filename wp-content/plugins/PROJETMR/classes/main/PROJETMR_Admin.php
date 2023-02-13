@@ -24,32 +24,19 @@ class PROJETMR_Admin
 
         add_submenu_page(
             'yeptrackchoicesfall_settings',
-            __('PROJET / Config'),
-            __('Config'),
+            __('PROJET / Liste'),
+            __('Liste'),
             'administrator',
             'yeptrackchoicesfall_import_forms',
-            array($this, 'listePays')
+            array($this, 'yeptrackchoicesfall_liste')
         );
 
     }
-    public function yeptrackchoicesfall_import_forms() {
 
-        $YepTrackChoicesFall_Import_Form = new Insset_Views_Config();
-        return $YepTrackChoicesFall_Import_Form->display();
+    public function yeptrackchoicesfall_liste() {
 
-    }
-
-    public function yeptrackchoicesfall_students() {
-
-        $Insset_Views_Inscrits = new Insset_Views_Inscrits();
+        $Insset_Views_Inscrits = new PROJETMR_Views_Liste();
         return $Insset_Views_Inscrits->display();
-
-    }
-    public function listePays() {
-
-        $view = new JC_ProjetLP_CountryListView();
-
-        return false;
 
     }
 
