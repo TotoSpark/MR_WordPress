@@ -57,8 +57,8 @@ class PROJETMR_Wp_List_Datas extends WP_List_Table {
         $columns['pays'] = __('pays');
         $columns['ISO'] = __('ISO');
         $columns['etoiles'] = __('etoiles');
-        $columns['majeur'] = __('majeur');
-        $columns['actif'] = __('actif');
+        $columns['majeur'] = __('disponible non majeur');
+        //$columns['actif'] = __('actif');
 
 
         global $wpdb;
@@ -71,7 +71,7 @@ class PROJETMR_Wp_List_Datas extends WP_List_Table {
         foreach ($result as $col) {
             $columns[$col['cle']] = __($col['cle']);
         }
-        $columns['delete']= __('delete');
+        //$columns['delete']= __('delete');
         return $columns;
 
     }
@@ -119,20 +119,24 @@ class PROJETMR_Wp_List_Datas extends WP_List_Table {
 
     public function column_default( $item,$column_name ) {
 
-        if (preg_match('/delete/i',$column_name))
+        if(preg_match('/majeur/i',$column_name))
+            return sprintf( '<input type="checkbox" name="majeur" id="%s" %s>', $item['ISO'], $item['majeur'] == 1 ? 'checked' : '' );
 
+
+        if (preg_match('/delete/i',$column_name))
             return self::getDelete($item['id']);
+
         return @$item[$column_name];
 
     }
 
-    private function getDelete($id){
-        if(!$id)
-            return;
-        return sprintf(
-            '<button id="%d" class="button-secondary button-small delbtn"><span class="dashicons dashicons-trash"></span></i></button>',
-            $id,
-            __("Delete"));
-    }
+    //private function getDelete($id){
+    //     if(!$id)
+    //        return;
+    //    return sprintf(
+    //        '<button id="%d" class="button-secondary button-small delbtn"><span class="dashicons dashicons-trash"></span></i></button>',
+    //        $id,
+    //        __("Delete"));
+    //}
 
 }
