@@ -24,6 +24,7 @@ class PROJETMR_Views_Liste {
                     $paged = filter_input(INPUT_GET, 'paged', FILTER_SANITIZE_NUMBER_INT);
                     printf('<input type="hidden" name="page" value="%s" />', $page);
                     printf('<input type="hidden" name="paged" value="%d" />', $paged);
+                    $Wp_List = new PROJETMR_Wp_List_Datas();
                     $Wp_List->prepare_items();
                     $Wp_List->display();
                     ?>

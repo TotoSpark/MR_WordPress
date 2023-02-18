@@ -7,7 +7,7 @@ if (!class_exists('WP_List_Table')) {
 
 class PROJETMR_Wp_List_Datas extends WP_List_Table {
 
-    public $_tablename = '';
+    public $_tablename = 'projetmr_pays';
     public $_program;
     public $_screen;
 
@@ -104,13 +104,7 @@ class PROJETMR_Wp_List_Datas extends WP_List_Table {
         global $wpdb;
 
         //$sql = 'SELECT * FROM `'. $wpdb->prefix . 'insset_subscribers`' . "WHERE 1";
-
-        $sql = "SELECT A.*, 
-            (SELECT B.`valeur` FROM " . $wpdb->prefix . PROJETMR_BASENAME . '_pays' . " B WHERE B.`id`=A.`id` AND B.`cle`='pays' LIMIT 1) AS 'pays', 
-            (SELECT B.`valeur` FROM " . $wpdb->prefix . PROJETMR_BASENAME . '_pays' . " B WHERE B.`id`=A.`id` AND B.`cle`='ISO' LIMIT 1) AS 'ISO',
-            (SELECT B.`valeur` FROM " . $wpdb->prefix . PROJETMR_BASENAME . '_pays' . " B WHERE B.`id`=A.`id` AND B.`cle`='etoiles' LIMIT 1) AS 'etoiles',
-            (SELECT B.`valeur` FROM " . $wpdb->prefix . PROJETMR_BASENAME . '_pays' . " B WHERE B.`id`=A.`id` AND B.`cle`='majeur' LIMIT 1) AS 'majeur'
-            FROM " . $wpdb->prefix . PROJETMR_BASENAME . '_pays' . " A ";
+        $sql = "SELECT * FROM " . $wpdb->prefix . $this->_tablename;
 
         if (!empty($_REQUEST['orderby'])) {
             $sql .= ' ORDER BY `'. esc_sql($_REQUEST['orderby']) .'`';
@@ -136,7 +130,7 @@ class PROJETMR_Wp_List_Datas extends WP_List_Table {
         if(!$id)
             return;
         return sprintf(
-            '<button data-id="%d" class="button-secondary button-small"><i class="fa-solid fa-trash"></i></button>',
+            '<button id="%d" class="button-secondary button-small delbtn"><span class="dashicons dashicons-trash"></span></i></button>',
             $id,
             __("Delete"));
     }
