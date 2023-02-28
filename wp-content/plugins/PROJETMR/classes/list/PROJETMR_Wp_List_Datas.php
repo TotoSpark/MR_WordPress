@@ -120,7 +120,7 @@ class PROJETMR_Wp_List_Datas extends WP_List_Table {
     public function column_default( $item,$column_name ) {
 
         if(preg_match('/majeur/i',$column_name))
-            return sprintf( '<input type="checkbox" name="majeur" id="%s" %s>', $item['ISO'], $item['majeur'] == 1 ? 'checked' : '' );
+            return sprintf( '<input type="checkbox" name="majeur" value="%d" id="%s" %s>', $item['id'], $item['id'], $item['majeur'] == 1 ? 'checked' : '' );
 
 
         if (preg_match('/delete/i',$column_name))

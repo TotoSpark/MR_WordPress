@@ -4,7 +4,7 @@ class PROJETMR_Views_Liste {
 
     public function display()
     {
-
+        $configs = PROJETMR_Crud_Index::getConfig();
         $Wp_List = new PROJETMR_Wp_List_Datas();
         $tempscreen = get_current_screen();
         $this->_screen = $tempscreen->base;
@@ -26,8 +26,7 @@ class PROJETMR_Views_Liste {
                     printf('<input type="hidden" name="paged" value="%d" />', $paged);
                     $Wp_List = new PROJETMR_Wp_List_Datas();
                     $Wp_List->prepare_items();
-                    $Wp_List->display();
-                    ?>
+                    $Wp_List->display();?>
                 </form>
             </div>
         </div>
