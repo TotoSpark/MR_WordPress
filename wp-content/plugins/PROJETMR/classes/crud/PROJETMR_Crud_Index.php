@@ -45,6 +45,33 @@ class PROJETMR_Crud_Index{
         return $result;
     }
 
+    static public function UpdateEtoiles($id, $valeur){
+
+        global $wpdb;
+
+        $db = $wpdb->prefix . PROJETMR_BASENAME .'_pays';
+
+        $request = $wpdb->update($db, array('etoiles' => $valeur), ['id' => $id]);
+
+        if($request){
+
+            return "Mise à jour faite !";
+
+        }
+
+        return "Error";
+    }
+
+    static public function ResultEtoiles($id){
+
+        global $wpdb;
+
+        $sql = "SELECT `etoiles` from ".$wpdb->prefix . PROJETMR_BASENAME."_pays WHERE `id`=".$id;
+        $result = $wpdb->get_results($sql, 'ARRAY_A');
+
+        return $result;
+    }
+
 }
 
 ?>

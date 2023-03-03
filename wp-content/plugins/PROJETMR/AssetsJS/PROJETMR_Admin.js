@@ -69,4 +69,49 @@ jQuery( document ).ready(function() {
         });
 
     });
+
+    jQuery('.slider').on('change', function(e) {
+
+        let formData = new FormData();
+
+        // Empêche le reload de la page
+        e.stopPropagation();
+        //e.preventDefault();
+
+        formData.append('action', 'updateetoiles');
+        formData.append('security', inssetscript.security);
+
+        let id = jQuery(this).attr('id');
+        let value = jQuery(this).val();
+        formData.append('etoiles', value);
+        formData.append('id', id);
+
+        jQuery('.valEtoiles-'+id).html(value);
+
+        let thisItem = jQuery(this).closest('tr');
+
+        // Requête ajax qui utilise les données de la variable 'formData'
+        jQuery.ajax({
+
+            url: ajaxurl,
+            xhrFields: {
+                withCredentials: true
+            },
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,
+            type: 'post',
+
+            success: function(rs) {
+
+                thisItem.fadeOut();
+                thisItem.fadeIn();
+
+                return false;
+            },
+
+        });
+
+    });
 });

@@ -95,6 +95,7 @@ class PROJETMR_Wp_List_Datas extends WP_List_Table {
 
         $sortable["id"] = array('id', true);
         $sortable["date"] = array('date', true);
+        $sortable['etoiles'] = array('etoiles', true);
 
         return $sortable;
     }
@@ -117,17 +118,30 @@ class PROJETMR_Wp_List_Datas extends WP_List_Table {
 
     }
 
-    public function column_default( $item,$column_name ) {
+    public function column_default( $item,$column_name,) {
 
         if(preg_match('/majeur/i',$column_name))
             return sprintf( '<input type="checkbox" name="majeur" value="%d" id="%s" %s>', $item['id'], $item['id'], $item['majeur'] == 1 ? 'checked' : '' );
 
+
+        if (preg_match('/etoiles/i', $column_name)){
+            return self::slider($item['etoiles'],$item['id']);
+        }
 
         if (preg_match('/delete/i',$column_name))
             return self::getDelete($item['id']);
 
         return @$item[$column_name];
 
+    }
+    private function slider($value,$id){
+        return sprintf(
+            "<div><input type='range' min='1' max='5' value='%d' class='slider' id='%d'><span class='valEtoiles-%d' style='padding-left: 10px'>%d</span></div>",
+            $value,
+            $id,
+            $id,
+            $value
+        );
     }
 
     //private function getDelete($id){

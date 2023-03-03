@@ -1,6 +1,7 @@
 <?php
 
 add_action('wp_ajax_voyagesmajeur', array('PROJETMR_Admin_Actions', 'Majeur'));
+add_action('wp_ajax_updateetoiles', array('PROJETMR_Admin_Actions', 'UpdateEtoiles'));
 
 class PROJETMR_Admin_Actions
 {
@@ -25,6 +26,19 @@ class PROJETMR_Admin_Actions
         else {
             $crud->UpdateMajeur($_REQUEST['majeur'],"0");
         }
+
+        exit;
+    }
+
+    static public function UpdateEtoiles(){
+        check_ajax_referer('ajax_nonce_security', 'security');
+        $crud = new PROJETMR_Crud_index();
+
+        if ((!isset($_REQUEST)) || sizeof(@$_REQUEST) < 1){
+            exit;
+        }
+
+        $crud->UpdatEtoiles($_REQUEST['id'], $_REQUEST['etoiles']);
 
         exit;
     }
