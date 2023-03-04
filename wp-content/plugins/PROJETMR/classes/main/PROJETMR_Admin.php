@@ -31,12 +31,28 @@ class PROJETMR_Admin
             array($this, 'yeptrackchoicesfall_liste')
         );
 
+        add_submenu_page(
+            'yeptrackchoicesfall_settings',
+            __('INSSET / Actif'),
+            __('Actif'),
+            'administrator',
+            'yeptrackchoicesfall_students',
+            array($this, 'yeptrackchoicesfall_students')
+        );
+
         add_action('admin_enqueue_scripts', array($this, 'assets'), 999);
     }
 
     public function yeptrackchoicesfall_liste() {
 
         $Insset_Views_Inscrits = new PROJETMR_Views_Liste();
+        return $Insset_Views_Inscrits->display();
+
+    }
+
+    public function yeptrackchoicesfall_students() {
+
+        $Insset_Views_Inscrits = new PROJETMR_Views_Actif();
         return $Insset_Views_Inscrits->display();
 
     }
