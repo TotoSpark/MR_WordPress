@@ -538,6 +538,19 @@ class PROJETMR_Install {
                 }
             }
         }
+        if (!$this->isTableBaseAlreadyCreated('_users')) {
+            $sql_users ='
+            CREATE TABLE IF NOT EXISTS `'. $wpdb->prefix . PROJETMR_BASENAME . '_users' .'` (
+                `id` INT(11) AUTO_INCREMENT NOT NULL,
+                `prenom` VARCHAR(255) NOT NULL,
+                `nom` VARCHAR(255) NOT NULL,
+                `civilite` VARCHAR(255) NOT NULL,
+                `email` VARCHAR(255) NOT NULL,
+                `date-naissance` DATETIME DEFAULT now() NOT NULL,
+                PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB '. $charset_collate;
+            dbDelta($sql_users);
+        }
     }
 
     public function isTableBaseAlreadyCreated($table) {
@@ -548,7 +561,7 @@ class PROJETMR_Install {
         return $wpdb->get_var($sql);
 
     }
-
 }
+
 
 ?>
