@@ -9,8 +9,8 @@ class INSSET_Shortcodes_Form
     {
         $Insset_Helper_Index = new Insset_Helper_Index();
         $isOpen = $Insset_Helper_Index->isOpen();
-        if (!$isOpen)
-            return __("Module Ferme");
+        //if (!$isOpen)
+          //  return __("Module Ferme");
        // return '<button id="btn"> Bouton</button>';
 ?>      <form id="robert">
                  <fieldset>

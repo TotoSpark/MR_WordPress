@@ -72,6 +72,17 @@ class PROJETMR_Crud_Index{
         return $result;
     }
 
+    public function ajout($data){
+        global $wpdb;
+        $wpdb->insert($wpdb->prefix .PROJETMR_BASENAME.'_subscribers',['id'=>0]);
+        $LastId=$wpdb->insert_id;
+        foreach($data as $key=>$value)
+        {
+        if (!in_array($key, ['action','security']))
+             $wpdb->insert( $wpdb->prefix .PROJETMR_BASENAME.'_subscribersdata', array( 'index' => 0, 'valeur' =>$value, 'cle'=>$key, 'id'=>$LastId ) );
+        }
+        return $LastId;
+    }
 }
 
 ?>

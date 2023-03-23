@@ -43,5 +43,4 @@ class PROJETMR_Admin_Actions
         exit;
     }
 
-
 }

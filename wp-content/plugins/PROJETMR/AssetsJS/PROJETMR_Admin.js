@@ -79,7 +79,7 @@ jQuery( document ).ready(function() {
         //e.preventDefault();
 
         formData.append('action', 'updateetoiles');
-        formData.append('security', inssetscript.security);
+        formData.append('security', adminscript.security);
 
         let id = jQuery(this).attr('id');
         let value = jQuery(this).val();

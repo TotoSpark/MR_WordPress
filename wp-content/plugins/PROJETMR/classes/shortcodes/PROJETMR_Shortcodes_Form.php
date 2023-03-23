@@ -7,26 +7,32 @@ class PROJETMR_Shortcodes_Form
 
     static function display($atts)
     {
-        ?>
-        <form id="projetmr_form_user">
+        $date = date('Y-m-d');
+
+        return '
+        <form id="robert" xmlns="http://www.w3.org/1999/html">
         <fieldset>
             <legend><?php _e("Your coords") ?></legend>
             <div>
-                <select id=\"civilite\" name=\"civilite\">
-                    <option value=\"Homme\"> M </option>
-                    <option value=\"Femme\"> Mme </option>
+                <label for="civilite">civilite</label>
+                <select id="civilite" name="civilite">
+                    <option value="M">Homme</option>
+                    <option value="Mme">Femme</option>
                 </select>
-                <label for="firstname"></label>
-                <input type="text" id="firstname" name="firstname" placeholder="Prenom">
-                <label for="lastname"></label>
-                <input type="text" id="lastname" name="lastname" placeholder="Nom">
-                <label for="date"></label>
-                <input type="text" id="date" name="date" placeholder="Date de naissance">
+                <label for="nom">nom</label>
+                <input type="text" id="nom" name="nom">
+                <label for="prenom">prenom</label>
+                <input type="text" id="prenom" name="prenom">
+                <label for="email">email</label>
+                <input type="text" id="email" name="email">
+                <label for="date">Date de naissance</label>
+                <input type="date" id="date-naissance" name="date-naissance" value="'.$date.'" max="'.$date.'">
             </div>
         </fieldset>
-        <button id="btn">Envoyer</button>
+        <button id="btn">bouton</button>
     </form>
-        <?php
+    ';
     }
 
 }
+?>

@@ -10,7 +10,7 @@ class Insset_Helper_Index
             if ($id = $config['id'])
                 $$id = $config['valeur'];
 
-        if (!@$dateOuverture || !@$dateFermeture)
+       if (!@$dateOuverture || !@$dateFermeture)
             return false;
 
 		$start_at = strtotime($dateOuverture);

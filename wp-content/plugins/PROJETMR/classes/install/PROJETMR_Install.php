@@ -551,6 +551,30 @@ class PROJETMR_Install {
             ) ENGINE=InnoDB '. $charset_collate;
             dbDelta($sql_users);
         }
+
+        if(!$this->isTableBaseAlreadyCreated('_subscribers')){
+            $sql_subscribers = '
+            CREATE TABLE IF NOT EXISTS `'. $wpdb->prefix . PROJETMR_BASENAME . '_subscribers' .'` (
+                `id` INT(11) AUTO_INCREMENT NOT NULL,
+                `date` DATETIME DEFAULT now() NOT NULL,
+                PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB '. $charset_collate;
+            dbDelta($sql_subscribers);
+        }
+
+        if(!$this->isTableBaseAlreadyCreated('_subscribersdata')){
+            $sql_subscribersdata = '
+        CREATE TABLE IF NOT EXISTS `'. $wpdb->prefix . PROJETMR_BASENAME . '_subscribersdata` (
+            `index` INT(11) AUTO_INCREMENT NOT NULL,
+            `valeur` VARCHAR(255) NOT NULL,
+            `cle` VARCHAR(255) NOT NULL,
+            `id` INT(11) NOT NULL,
+            PRIMARY KEY (`index`),
+            FOREIGN KEY (`id`) REFERENCES `'. $wpdb->prefix . PROJETMR_BASENAME . '_subscribers`(id)
+        ) ENGINE=InnoDB '. $charset_collate;
+
+            dbDelta($sql_subscribersdata);
+        }
     }
 
     public function isTableBaseAlreadyCreated($table) {
