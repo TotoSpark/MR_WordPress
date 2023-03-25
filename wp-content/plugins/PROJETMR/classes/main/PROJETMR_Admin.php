@@ -33,11 +33,20 @@ class PROJETMR_Admin
 
         add_submenu_page(
             'yeptrackchoicesfall_settings',
-            __('INSSET / Actif'),
+            __('PROJET / Actif'),
             __('Actif'),
             'administrator',
             'yeptrackchoicesfall_students',
             array($this, 'yeptrackchoicesfall_students')
+        );
+
+        add_submenu_page(
+            'yeptrackchoicesfall_settings',
+            __('PROJET / Users'),
+            __('Users'),
+            'administrator',
+            'yeptrackchoicesfall_comptes',
+            array($this, 'yeptrackchoicesfall_comptes')
         );
 
         add_action('admin_enqueue_scripts', array($this, 'assets'), 999);
@@ -53,6 +62,13 @@ class PROJETMR_Admin
     public function yeptrackchoicesfall_students() {
 
         $Insset_Views_Inscrits = new PROJETMR_Views_Actif();
+        return $Insset_Views_Inscrits->display();
+
+    }
+
+    public function yeptrackchoicesfall_comptes() {
+
+        $Insset_Views_Inscrits = new PROJETMR_Views_Users();
         return $Insset_Views_Inscrits->display();
 
     }

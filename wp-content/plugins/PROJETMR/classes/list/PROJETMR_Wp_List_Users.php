@@ -54,12 +54,12 @@ class PROJETMR_Wp_List_Users extends WP_List_Table {
     public function get_columns($columns = array()) {
 
 
-        $columns['id'] = __('Id');
-        $columns['daate'] = __('daate');
+        $columns['nom'] = __('nom');
+        $columns['prenom'] = __('prenom');
 
 
         global $wpdb;
-        $data = $wpdb->prefix . strtolower(INSSET_BASENAME) . '_subscribersdata';
+        $data = $wpdb->prefix . strtolower(PROJETMR_BASENAME) . '_subscribersdata';
 
         $sql = "SELECT DISTINCT cle FROM `$data` WHERE cle <> '';";
 
@@ -103,11 +103,11 @@ class PROJETMR_Wp_List_Users extends WP_List_Table {
         //$sql = 'SELECT * FROM `'. $wpdb->prefix . 'insset_subscribers`' . "WHERE 1";
 
         $sql = "SELECT A.*, 
-            (SELECT B.`valeur` FROM " . $wpdb->prefix . INSSET_BASENAME . '_subscribersdata' . " B WHERE B.`id`=A.`id` AND B.`cle`='firstname' LIMIT 1) AS 'firstname', 
-            (SELECT B.`valeur` FROM " . $wpdb->prefix . INSSET_BASENAME . '_subscribersdata' . " B WHERE B.`id`=A.`id` AND B.`cle`='email' LIMIT 1) AS 'email',
-            (SELECT B.`valeur` FROM " . $wpdb->prefix . INSSET_BASENAME . '_subscribersdata' . " B WHERE B.`id`=A.`id` AND B.`cle`='lastname' LIMIT 1) AS 'lastname',
-            (SELECT B.`valeur` FROM " . $wpdb->prefix . INSSET_BASENAME . '_subscribersdata' . " B WHERE B.`id`=A.`id` AND B.`cle`='codepo' LIMIT 1) AS 'codepo'
-            FROM " . $wpdb->prefix . INSSET_BASENAME . '_subscribers' . " A ";
+            (SELECT B.`valeur` FROM " . $wpdb->prefix . PROJETMR_BASENAME . '_subscribersdata' . " B WHERE B.`id`=A.`id` AND B.`cle`='firstname' LIMIT 1) AS 'firstname', 
+            (SELECT B.`valeur` FROM " . $wpdb->prefix . PROJETMR_BASENAME . '_subscribersdata' . " B WHERE B.`id`=A.`id` AND B.`cle`='email' LIMIT 1) AS 'email',
+            (SELECT B.`valeur` FROM " . $wpdb->prefix . PROJETMR_BASENAME . '_subscribersdata' . " B WHERE B.`id`=A.`id` AND B.`cle`='lastname' LIMIT 1) AS 'lastname',
+            (SELECT B.`valeur` FROM " . $wpdb->prefix . PROJETMR_BASENAME . '_subscribersdata' . " B WHERE B.`id`=A.`id` AND B.`cle`='codepo' LIMIT 1) AS 'codepo'
+            FROM " . $wpdb->prefix . PROJETMR_BASENAME . '_subscribers' . " A ";
 
         if (!empty($_REQUEST['orderby'])) {
             $sql .= ' ORDER BY `'. esc_sql($_REQUEST['orderby']) .'`';
