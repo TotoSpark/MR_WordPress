@@ -8,6 +8,7 @@ class PROJETMR_Views_Liste {
         $Wp_List = new PROJETMR_Wp_List_Datas();
         $tempscreen = get_current_screen();
         $this->_screen = $tempscreen->base;
+        $toolbar = $this->toolbar();
 
 
         ?>
@@ -17,6 +18,7 @@ class PROJETMR_Views_Liste {
             <div class="notice notice-info notice-alt is-dismissible hide delete-confirmation">
                 <p><?php _e('Updated done!'); ?></p>
             </div>
+            <?php //if (sizeof($toolbar)) self::toolbar($toolbar); ?>
             <div class="wrap" id="list-table">
                 <form id="list-table-form" method="post">
                     <?php
@@ -29,6 +31,29 @@ class PROJETMR_Views_Liste {
                     $Wp_List->display();?>
                 </form>
             </div>
+        </div>
+        <?php
+
+    }
+
+    private function toolbar() {
+        ?>
+        <div>
+            <form action="<?php print admin_url('admin-post.php');?>" method="post">
+                <table>
+                    <tbody>
+                    <tr>
+                        <?php if (defined('PROJETMR_PLUGIN_NAME')) : ?>
+                            <td>
+                                <a class="button button-secondary" href="<?php print plugins_url(PROJETMR_PLUGIN_NAME . '/classes/export/PROJETMR_Export_XML.php'); ?>">
+                                    <i class="fas fa-save"></i> XML
+                                </a>
+                            </td>
+                        <?php endif ?>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
         </div>
         <?php
     }
