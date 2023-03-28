@@ -33,10 +33,30 @@ class PROJETMR_Views_Users {
                 </div>
             </table>
         </div>
+        <div>
 
+            <form action="<?php print admin_url('admin-post.php'); ?>" method="post">
+                <table>
+                    <tbody>
+                    <tr>
+                        <?php if(defined('PROJETMR_PLUGIN_NAME')): ?>
+                            <td>
+                                <a class="button button-secondary" href="<?php print plugins_url(PROJETMR_PLUGIN_NAME.'/classes/export/PROJETMR_Export_XML.php'); ?>">
+                                    <i class="fas fa-save"></i>&nbsp;XML
+                                </a>
+                            </td>
+                        <?php endif; ?>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+
+        <hr class="wp-header-end">
         <?php
 
     }
+
 
 }
 
