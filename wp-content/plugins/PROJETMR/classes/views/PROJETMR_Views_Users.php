@@ -41,8 +41,8 @@ class PROJETMR_Views_Users {
                     <tr>
                         <?php if(defined('PROJETMR_PLUGIN_NAME')): ?>
                             <td>
-                                <a class="button button-secondary" href="<?php print plugins_url(PROJETMR_PLUGIN_NAME.'/classes/export/PROJETMR_Export_XML.php'); ?>">
-                                    <i class="fas fa-save"></i>&nbsp;XML
+                                <a class="button button-secondary" href="<?php print plugins_url(PROJETMR_PLUGIN_NAME.'/classes/export/PROJETMR_Export_CSV.php'); ?>">
+                                    <i class="fas fa-save"></i>&nbsp;CSV
                                 </a>
                             </td>
                         <?php endif; ?>
